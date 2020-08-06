@@ -16,7 +16,7 @@ Feature: accept/decline shares coming from internal users
     And user "Brian" has been added to group "grp1"
     And user "Carol" has been added to group "grp1"
 
-  @smokeTest @skipOnOcis
+  @smokeTest @skipOnOcis @toImplementOnOCIS
   Scenario Outline: share a file & folder with another internal user with different permissions when auto accept is enabled
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "yes"
     When user "Alice" creates a share using the sharing API with settings
@@ -46,7 +46,7 @@ Feature: accept/decline shares coming from internal users
       | change      |
       | all         |
 
-  @skipOnOcis
+  @skipOnOcis @toImplementOnOCIS
   Scenario Outline: share a file & folder with another internal user when auto accept is enabled and there is a default folder for received shares
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "yes"
     And the administrator has set the default folder for received shares to "<share_folder>"
@@ -73,7 +73,7 @@ Feature: accept/decline shares coming from internal users
       | ReceivedShares      | /ReceivedShares     |        | PARENT               | textfile0.txt          |
       | /My/Received/Shares | /My/Received/Shares |        | PARENT               | textfile0.txt          |
 
-  @skipOnOcis
+  @skipOnOcis @toImplementOnOCIS
   Scenario Outline: share a file & folder with internal group with different permissions when auto accept is enabled
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "yes"
     When user "Alice" creates a share using the sharing API with settings
@@ -259,7 +259,7 @@ Feature: accept/decline shares coming from internal users
       | path     |
       | /shared/ |
 
-  @skipOnOcis
+  @skipOnOcis @toImplementOnOCIS
   Scenario: receive two shares with identical names from different users
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "yes"
     And user "Alice" has created folder "/shared"
@@ -434,7 +434,7 @@ Feature: accept/decline shares coming from internal users
       | path     |
       | /shared/ |
 
-  @smokeTest @skipOnOcis @toImplementOnOCIS
+  @smokeTest @skipOnOcis
   Scenario: declines a pending share
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "no"
     And user "Alice" has shared folder "/PARENT" with user "Brian"
@@ -456,7 +456,7 @@ Feature: accept/decline shares coming from internal users
       | /PARENT/       |
       | /textfile0.txt |
 
-  @smokeTest @skipOnOcis @toImplementOnOCIS
+  @smokeTest @skipOnOcis
   Scenario: decline an accepted share
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "no"
     And user "Alice" has shared folder "/PARENT" with user "Brian"
@@ -543,7 +543,7 @@ Feature: accept/decline shares coming from internal users
       | /PARENT/ |
     And the sharing API should report that no shares are shared with user "Alice"
 
-  @skipOnOcis @toImplementOnOCIS
+  @skipOnOcis
   Scenario: user accepts file that was initially accepted from another user and then declined
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "no"
     And user "Alice" has uploaded file with content "First file" to "/testfile.txt"
@@ -563,7 +563,7 @@ Feature: accept/decline shares coming from internal users
     And the content of file "/testfile (2).txt" for user "Carol" should be "Second file"
     And the content of file "/testfile (2) (2).txt" for user "Carol" should be "First file"
 
-  @skipOnOcis @toImplementOnOCIS
+  @skipOnOcis
   Scenario: user accepts shares received from multiple users with the same name when auto-accept share is disabled
     Given parameter "shareapi_auto_accept_share" of app "core" has been set to "no"
     And user "David" has been created with default attributes and skeleton files
